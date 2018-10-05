@@ -1,6 +1,6 @@
 # REST API acceptance test framework core
 
-[![Build Status](https://travis-ci.com/<account>/<repo>.svg?branch=master)](https://travis-ci.com/<account>/<repo>) [![Coverage Status](https://coveralls.io/repos/github/<account>/<repo>/badge.svg?branch=master)](https://coveralls.io/github/<account>/<repo>?branch=master)
+[![Build Status](https://travis-ci.org/neotechlv/rest-api-acceptance-test-framework.svg?branch=master)](https://travis-ci.org/neotechlv/rest-api-acceptance-test-framework) [![Coverage Status](https://coveralls.io/repos/github/neotechlv/rest-api-acceptance-test-framework/badge.svg?branch=master)](https://coveralls.io/github/<account>/<repo>?branch=master)
 
 The core of REST API acceptance test framework consists of 2 modules:
 
