@@ -1,0 +1,43 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+}
+
+plugins {
+    id "java" apply true
+    id "idea" apply true
+}
+
+apply from: "$rootDir/gradle/dependencies.gradle"
+apply from: "$rootDir/gradle/wrapper.gradle"
+
+idea {
+    project {
+        languageLevel = "1.8"
+    }
+}
+
+defaultTasks "clean", "build"
+
+allprojects {
+    task allDeps(type: DependencyReportTask) {}
+    dependencies {
+        repositories {
+            mavenCentral()
+            jcenter()
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+subprojects {
+    jar {
+        version = projectVersion
+    }
+}

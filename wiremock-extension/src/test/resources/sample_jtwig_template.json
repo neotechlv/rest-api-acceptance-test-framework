@@ -1,0 +1,6 @@
+{
+  "one": "{{oneValueTpl}}",
+  "two": "twoValue",
+  "three": "{{threeValueTpl}}",
+  "unresolved": "{{unresolved}}"
+}

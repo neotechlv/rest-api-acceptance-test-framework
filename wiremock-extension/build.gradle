@@ -1,0 +1,9 @@
+apply plugin: 'java'
+
+dependencies {
+    compile libs.wiremock
+    compile libs.guice
+    compile libs.assertj
+    testCompile libs.logging
+    testCompile libs.mockito
+}

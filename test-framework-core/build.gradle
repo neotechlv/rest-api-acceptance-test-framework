@@ -1,0 +1,14 @@
+apply plugin: 'java'
+
+dependencies {
+    compile project(":wiremock-extension")
+    compile libs.junit4
+    compile libs.assertj
+    compile libs.guice
+    compile libs.cucumber
+    compile libs.logging
+    compile libs.configuration
+    compile libs.allure
+    compile libs.circuitBreaker
+    compile libs.commons
+}

@@ -1,0 +1,79 @@
+ext {
+
+    allureVersion = '2.0-BETA18'
+    restAssuredVersion = '3.0.3'
+    cucumberVersion = '1.2.5'
+
+    libs = [
+            junit4        : [
+                    "junit:junit:4.12"
+            ],
+            assertj       : [
+                    "org.assertj:assertj-core:3.8.0",
+                    'com.toomuchcoding.jsonassert:jsonassert:0.4.9',
+                    "io.qameta.allure:allure-assertj:${allureVersion}",
+            ],
+            mockito       : [
+                    "org.mockito:mockito-all:1.9.5",
+            ],
+            logging       : [
+                    'org.slf4j:slf4j-api:1.7.25',
+                    'ch.qos.logback:logback-classic:1.2.3'
+            ],
+            configuration : [
+                    'org.aeonbits.owner:owner-java8:1.0.9'
+            ],
+            allure        : [
+                    "io.qameta.allure:allure-java-commons:${allureVersion}",
+                    "io.qameta.allure:allure-junit4:${allureVersion}",
+                    "io.qameta.allure:allure-junit4-aspect:${allureVersion}"
+            ],
+            guice         : [
+                    'com.google.inject:guice:4.1.0',
+                    'com.mycila.guice.extensions:mycila-guice-jsr250:4.0.rc1',
+                    'com.mycila.guice.extensions:mycila-guice-closeable:4.0.rc1'
+            ],
+            cucumber      : [
+                    "info.cukes:cucumber-java:${cucumberVersion}",
+                    "info.cukes:cucumber-java8:${cucumberVersion}",
+                    "info.cukes:cucumber-junit:${cucumberVersion}",
+                    "info.cukes:cucumber-guice:${cucumberVersion}",
+                    "io.qameta.allure:allure-cucumber-jvm:${allureVersion}",
+            ],
+            wiremock      : [
+                    'com.github.tomakehurst:wiremock:2.7.1',
+                    "org.jtwig:jtwig-core:5.86.0.RELEASE",
+                    "org.freemarker:freemarker:2.3.23"
+            ],
+            testContainers: [
+                    'org.testcontainers:testcontainers:1.6.0'
+            ],
+            commons: [
+                    'commons-codec:commons-codec:1.10',
+                    'commons-io:commons-io:2.6'
+            ],
+            restAssured   : [
+                    "io.rest-assured:rest-assured:${restAssuredVersion}",
+                    "io.rest-assured:json-path:${restAssuredVersion}",
+                    "io.rest-assured:json-schema-validator:${restAssuredVersion}",
+                    "org.codehaus.groovy:groovy-all:2.4.6",
+                    "io.qameta.allure:allure-rest-assured:${allureVersion}"
+            ],
+            httpClient    : [
+                    "org.apache.httpcomponents:httpclient:4.5.3",
+                    "io.qameta.allure:allure-httpclient:${allureVersion}"
+            ],
+            jolokiaClient : [
+                    'org.jolokia:jolokia-client-java:1.3.6'
+            ],
+            selenium      : [
+                    "com.codeborne:selenide:4.4.3",
+                    "org.seleniumhq.selenium:selenium-firefox-driver:3.4.0",
+                    "io.github.bonigarcia:webdrivermanager:1.4.1"
+            ],
+            circuitBreaker : [
+                    "org.rnorth.duct-tape:duct-tape:1.0.6"
+            ]
+    ]
+
+}

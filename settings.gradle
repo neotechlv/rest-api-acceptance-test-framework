@@ -1,0 +1,4 @@
+rootProject.name = 'rest-api-acceptance-test-framework'
+
+include 'wiremock-extension'
+include 'test-framework-core'

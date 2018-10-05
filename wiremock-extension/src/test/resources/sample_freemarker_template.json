@@ -1,0 +1,5 @@
+{
+  "one": "${oneValueTpl}",
+  "two": "${twoValueTpl}",
+  "concatenated": "${concatenator.concatenate(oneValueTpl, twoValueTpl)}"
+}

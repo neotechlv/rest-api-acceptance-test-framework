@@ -1,0 +1,17 @@
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+
+### Gradle ###
+.gradle
+build/
+out/
+
+### Allure ###
+.allure/
+allure-results/
+
+### Tests ###
+.testcontainers*
