@@ -15,6 +15,10 @@ import java.util.Optional;
 
 import static org.apache.commons.lang3.StringUtils.startsWith;
 
+/**
+ * Utility to get host information, to work around currently limited <code>TestContainers</code> ability to
+ * provide such information.
+ */
 public class DockerSupport {
 
     private DockerSupport() {}
