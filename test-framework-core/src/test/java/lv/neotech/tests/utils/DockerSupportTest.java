@@ -1,6 +1,8 @@
-package lv.neotech.tests;
+package lv.neotech.tests.utils;
 
 import org.junit.Test;
+
+import lv.neotech.tests.utils.DockerSupport;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 

@@ -1,4 +1,4 @@
-package lv.neotech.tests;
+package lv.neotech.tests.utils;
 
 import org.apache.commons.lang3.StringUtils;
 

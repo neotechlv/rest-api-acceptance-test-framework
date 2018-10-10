@@ -24,6 +24,7 @@ idea {
 defaultTasks "clean", "build"
 
 allprojects {
+    apply plugin: "maven-publish"
     apply plugin: 'com.github.kt3k.coveralls'
     apply plugin: 'jacoco'
 
@@ -51,6 +52,18 @@ subprojects {
         reports {
             xml.enabled = true // coveralls plugin depends on xml format report
             html.enabled = true
+        }
+    }
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                groupId projectGroupId
+                artifactId project.getName()
+                version projectVersion
+
+                from components.java
+            }
         }
     }
 }
