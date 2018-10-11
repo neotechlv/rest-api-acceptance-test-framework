@@ -9,6 +9,10 @@ import cucumber.api.junit.Cucumber;
 import cucumber.runtime.Runtime;
 import cucumber.runtime.RuntimeOptions;
 import cucumber.runtime.io.ResourceLoader;
+import lv.neotech.tests.configuration.GlobalTestSettings;
+
+import static com.google.common.base.Preconditions.checkState;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * <p>Extended Cucumber test runner that sets the information about current test profile
@@ -41,7 +45,7 @@ import cucumber.runtime.io.ResourceLoader;
  * }
  * </pre>
  *
- * <p>The `env` property set for test runtime can be used to load an appropriate config file</p>
+ * <p>The `test-env` property set for test runtime can be used to load an appropriate config file</p>
  */
 public class ProfiledCucumberRunner extends Cucumber {
 
@@ -50,12 +54,17 @@ public class ProfiledCucumberRunner extends Cucumber {
     }
 
     @Override
-    protected Runtime createRuntime(ResourceLoader resourceLoader, ClassLoader classLoader, RuntimeOptions runtimeOptions) throws InitializationError, IOException {
+    protected Runtime createRuntime(ResourceLoader resourceLoader, ClassLoader classLoader, RuntimeOptions runtimeOptions)
+            throws InitializationError, IOException {
         TestClass testClass = getTestClass();
         TestEnvironmentProfile environmentProfile = testClass.getAnnotation(TestEnvironmentProfile.class);
-        if (environmentProfile != null) {
-            System.setProperty(environmentProfile.systemVarToSet(), environmentProfile.name());
-        }
+
+        checkState(environmentProfile != null && isNotBlank(environmentProfile.name()),
+                "Environment profile definition in @%s is missing", TestEnvironmentProfile.class.getSimpleName());
+
+        GlobalTestSettings.setEnvironment(environmentProfile.name());
+        GlobalTestSettings.setConfigFile(environmentProfile.configFile());
+
         return super.createRuntime(resourceLoader, classLoader, runtimeOptions);
     }
 

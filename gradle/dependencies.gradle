@@ -21,7 +21,8 @@ ext {
                     'ch.qos.logback:logback-classic:1.2.3'
             ],
             configuration : [
-                    'org.aeonbits.owner:owner-java8:1.0.9'
+                    'org.aeonbits.owner:owner-java8:1.0.9',
+                    'commons-configuration:commons-configuration:1.10'
             ],
             allure        : [
                     "io.qameta.allure:allure-java-commons:${allureVersion}",

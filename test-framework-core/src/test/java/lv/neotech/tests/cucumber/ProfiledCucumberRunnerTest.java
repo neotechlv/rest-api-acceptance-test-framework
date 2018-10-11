@@ -2,28 +2,32 @@ package lv.neotech.tests.cucumber;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.RestoreSystemProperties;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.RunWith;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
+import lv.neotech.tests.configuration.GlobalTestSettings;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProfiledCucumberRunnerTest {
 
-    private static final String ENV = "env";
+    @Rule
+    public final RestoreSystemProperties restoreSystemProperties = new RestoreSystemProperties();
 
     @Test
     public void shouldSetProfileToSystemVariable() {
-        Result result = JUnitCore.runClasses(ProfiledTest.class, UnprofiledTest.class);
+        Result result = JUnitCore.runClasses(ProfiledTest.class);
         assertThat(result.wasSuccessful()).isTrue();
     }
 
     @RunWith(ProfiledCucumberRunner.class)
-    @TestEnvironmentProfile(name = "dev", systemVarToSet = ENV)
+    @TestEnvironmentProfile(name = "dev")
     public static class ProfiledTest extends TestBase {
 
         @BeforeClass
@@ -33,25 +37,15 @@ public class ProfiledCucumberRunnerTest {
 
     }
 
-    @RunWith(ProfiledCucumberRunner.class)
-    public static class UnprofiledTest extends TestBase {
-
-        @BeforeClass
-        public static void shouldNotSetProfileToSystemVariable() {
-            assertThat(getEnvValue()).isNull();
-        }
-
-    }
-
     public abstract static class TestBase {
 
         @AfterClass
         public static void cleanUp() {
-            System.clearProperty(ENV);
+            System.clearProperty(GlobalTestSettings.ENV_VAR);
         }
 
         static String getEnvValue() {
-            return System.getProperty(ENV);
+            return GlobalTestSettings.getEnvironment();
         }
 
     }

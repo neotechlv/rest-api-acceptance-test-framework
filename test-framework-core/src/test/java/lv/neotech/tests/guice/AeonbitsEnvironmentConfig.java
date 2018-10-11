@@ -4,8 +4,8 @@ import org.aeonbits.owner.Config;
 import org.aeonbits.owner.Mutable;
 
 @Config.LoadPolicy(Config.LoadType.MERGE)
-@Config.Sources({"classpath:config/base.properties"})
-public interface EnvironmentConfig extends Mutable {
+@Config.Sources({"classpath:config/${test-env}/base.properties"})
+public interface AeonbitsEnvironmentConfig extends Mutable {
 
     @Key("book-service.baseUrl")
     String bookServiceBaseUrl();

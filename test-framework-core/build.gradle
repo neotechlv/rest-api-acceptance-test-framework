@@ -11,4 +11,6 @@ dependencies {
     compile libs.allure
     compile libs.circuitBreaker
     compile libs.commons
+
+    testCompile('com.github.stefanbirkner:system-rules:1.18.0')
 }

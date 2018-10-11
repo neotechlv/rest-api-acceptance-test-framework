@@ -14,16 +14,17 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface TestEnvironmentProfile {
 
+    String DEFAULT_CONFIG_FILE_NAME = "config.properties";
+
     /**
      * Profile name
-     * @return
+     * @return profile name
      */
     String name();
 
     /**
-     * System variable to set to this profile name
-     * @return
+     * Config file name
+     * @return configuration file to load data from
      */
-    String systemVarToSet() default "env";
-
+    String configFile() default DEFAULT_CONFIG_FILE_NAME;
 }
