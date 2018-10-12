@@ -19,7 +19,7 @@ import lv.neotech.tests.cucumber.TestEnvironmentProfile;
 
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.collect.Maps.newHashMap;
+import static com.google.common.collect.Maps.newConcurrentMap;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 
@@ -32,18 +32,25 @@ public class TestConfigurationProvider {
      */
     private static final String CONFIG_FILE_CLASSPATH_PREFIX = "config";
 
-    private static Map<Class, TestConfiguration> CONFIG_MAP = newHashMap();
+    public static Map<Class, TestConfiguration> CONFIG_CACHE = newConcurrentMap();
 
     private final List<String> configFileNames = newArrayList();
 
     private String profile;
 
+    public static <C extends TestConfiguration> C fromDefaults(Class<C> clazz) {
+        return fromDefaults(clazz, false);
+    }
 
     public static <C extends TestConfiguration> C fromDefaults(Class<C> clazz, boolean reloadIfPresent) {
         return new TestConfigurationProvider()
                 .withProfile(GlobalTestSettings.getEnvironment())
                 .withPropertyFile(GlobalTestSettings.getConfigFile())
                 .provide(clazz, reloadIfPresent);
+    }
+
+    public static void resetCache() {
+        CONFIG_CACHE.clear();
     }
 
     public TestConfigurationProvider withPropertyFile(String propertyFileName) {
@@ -60,8 +67,9 @@ public class TestConfigurationProvider {
     public <C extends TestConfiguration> C provide(Class<C> clazz, boolean reloadIfPresent) {
         checkState(isNotBlank(profile), "Test profile is undefined");
 
-        if (CONFIG_MAP.containsKey(clazz) && !reloadIfPresent) {
-            return (C) CONFIG_MAP.get(clazz);
+        if (CONFIG_CACHE.containsKey(clazz) && !reloadIfPresent) {
+            LOGGER.info("Test configuration for {} already loaded, reusing", clazz.getName());
+            return (C) CONFIG_CACHE.get(clazz);
         } else {
             if (configFileNames.isEmpty()) {
                 configFileNames.add(TestEnvironmentProfile.DEFAULT_CONFIG_FILE_NAME);
@@ -69,7 +77,7 @@ public class TestConfigurationProvider {
             LOGGER.info("Loading test configuration");
 
             C configuration = newConfiguration(clazz, profile, configFileNames);
-            CONFIG_MAP.put(clazz, configuration);
+            CONFIG_CACHE.put(clazz, configuration);
 
             return configuration;
         }

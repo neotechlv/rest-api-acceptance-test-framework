@@ -1,0 +1,62 @@
+apply plugin: 'maven-publish'
+
+task sourceJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+javadoc.failOnError = false
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+artifacts {
+    archives sourceJar
+    archives javadocJar
+}
+
+def pomConfig = {
+    issueManagement {
+        system 'GitHub'
+        url "${gitHubUrl}/issues"
+    }
+    licenses {
+        license {
+            name 'Apache-2.0'
+            url 'https://opensource.org/licenses/Apache-2.0'
+        }
+    }
+    scm {
+        url gitHubUrl
+        connection gitHubScm
+        developerConnection gitHubScm
+    }
+    developers {
+        developer {
+            id 'kshepitko'
+            name 'Kirill Shepitko'
+            email 'kirill.shepitko@neotech.lv'
+        }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            groupId projectGroupId
+            artifactId = project.name
+            version projectVersion
+
+            artifact sourceJar
+            artifact javadocJar
+
+            pom.withXml {
+                def rootNode = asNode()
+                rootNode.appendNode('url', gitHubUrl)
+                rootNode.children().last() + pomConfig
+            }
+        }
+    }
+}

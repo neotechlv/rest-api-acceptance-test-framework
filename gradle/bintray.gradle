@@ -1,0 +1,24 @@
+apply plugin: "com.jfrog.bintray"
+
+bintray {
+    user = System.getProperty('bintray.user')
+    key = System.getProperty('bintray.key')
+
+    publications = ['mavenJava']
+
+    pkg {
+        userOrg = 'neotechlv'
+        repo = 'releases'
+        name = project.name
+        licenses = ['Apache-2.0']
+        vcsUrl = gitHubScm
+
+        publish = true
+
+        version {
+            name = projectVersion
+            vcsTag = projectVersion
+            released = new Date()
+        }
+    }
+}

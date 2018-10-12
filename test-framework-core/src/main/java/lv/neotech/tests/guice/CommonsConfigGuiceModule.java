@@ -11,9 +11,7 @@ public final class CommonsConfigGuiceModule<ENVCONFIG extends TestConfiguration>
 
     @Override
     ENVCONFIG createConfigInstance() {
-        // If configuration is altered in test runtime to overrride/set the dynamically allocated ports,
-        // they will be lost if we reset the config here
-        return TestConfigurationProvider.fromDefaults(configClass, false);
+        return TestConfigurationProvider.fromDefaults(configClass, true);
     }
 
 }
