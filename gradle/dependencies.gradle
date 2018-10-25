@@ -42,7 +42,7 @@ ext {
                     "io.qameta.allure:allure-cucumber-jvm:${allureVersion}",
             ],
             wiremock      : [
-                    'com.github.tomakehurst:wiremock:2.7.1',
+                    "com.github.tomakehurst:wiremock:2.19.0",
                     "org.jtwig:jtwig-core:5.86.0.RELEASE",
                     "org.freemarker:freemarker:2.3.23"
             ],

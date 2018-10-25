@@ -56,7 +56,7 @@ public abstract class AbstractServiceMock {
     public final void verifyNoRequestMismatches() {
         List<NearMiss> nearMisses = mock.findNearMissesForUnmatchedRequests().getNearMisses();
         if (!nearMisses.isEmpty()) {
-            throw VerificationException.forUnmatchedRequests(nearMisses);
+            throw VerificationException.forUnmatchedNearMisses(nearMisses);
         }
         List<LoggedRequest> allUnmatchedRequests = mock.findUnmatchedRequests().getRequests();
         // Unfortunately, no nice Wiremock throwable for "far misses"
