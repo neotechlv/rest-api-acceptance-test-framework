@@ -33,10 +33,14 @@ public class DockerSupport {
     private static Optional<String> optionalCurrentHostIpInDocker() {
         String osName = System.getProperty("os.name", StringUtils.EMPTY);
         if (osName.contains("Win")) {
-            throw new UnsupportedOperationException("Host IP detection for Windows is not supported yet");
+        /*
+        From version 18.03 onwards Docker recommends to connect to the special DNS name host.docker.internal,
+        which resolves to the internal IP address used by the host
+         */
+            return Optional.of("host.docker.internal");
         }
         if (osName.contains("Mac")) {
-            return Optional.of("docker.for.mac.localhost");
+            return Optional.of("docker.for.mac.host.internal");
         }
         Enumeration<NetworkInterface> networkInterfaces;
         try {
