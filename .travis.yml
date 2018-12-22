@@ -5,9 +5,12 @@ jdk:
 before_install:
  - chmod +x gradlew
 
+install:
+  - ./gradlew build
+
 jobs:
   include:
-    - stage: "Build"
+    - stage: "Coverage"
       script: ./gradlew jacocoRootReport coveralls
 
     - stage: "Deploy"
