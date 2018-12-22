@@ -45,10 +45,6 @@ subprojects {
 
     sourceCompatibility = 1.8
 
-    jar {
-        version = projectVersion
-    }
-
     jacocoTestReport {
         reports {
             xml.enabled = true // coveralls plugin depends on xml format report

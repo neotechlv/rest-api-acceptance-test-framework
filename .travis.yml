@@ -1,7 +1,23 @@
 language: java
 jdk:
   - oraclejdk8
+
 before_install:
  - chmod +x gradlew
-after_success:
-- ./gradlew jacocoRootReport coveralls
+
+jobs:
+  include:
+    - stage: "Build"
+      script: ./gradlew jacocoRootReport coveralls
+
+    - stage: "Deploy"
+      sudo: false
+      services: []
+      install: skip
+      script: skip
+      deploy:
+        provider: script
+        script: ./gradlew -Pversion=$TRAVIS_TAG build -x test bintrayUpload
+        on:
+          tags: true
+          branch: master
