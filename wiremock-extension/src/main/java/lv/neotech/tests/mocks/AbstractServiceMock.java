@@ -3,6 +3,7 @@ package lv.neotech.tests.mocks;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.VerificationException;
 import com.github.tomakehurst.wiremock.common.FileSource;
+import com.github.tomakehurst.wiremock.extension.responsetemplating.ResponseTemplateTransformer;
 import com.github.tomakehurst.wiremock.verification.LoggedRequest;
 import com.github.tomakehurst.wiremock.verification.NearMiss;
 
@@ -26,7 +27,7 @@ public abstract class AbstractServiceMock {
                 options()
                         .port(port)
                         .fileSource(definitionFileSource)
-                        .extensions(new FreemarkerTemplateTransformer())
+                        .extensions(new FreemarkerTemplateTransformer(), new ResponseTemplateTransformer(false))
         );
         mock.start();
     }
